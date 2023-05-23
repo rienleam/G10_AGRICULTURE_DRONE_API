@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('farms', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('location');
+            $table->string('size');
+            $table->unsignedBigInteger('province_id');
+            $table->foreign('province_id')
+                    ->references('id')
+                    ->on('provinces')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }
