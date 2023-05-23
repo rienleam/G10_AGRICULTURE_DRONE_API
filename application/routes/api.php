@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DroneController;
 use App\Http\Controllers\FarmerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/farmer')->group(function () {
         // ------------------- farmer route -------------
         Route::post('/logout', [FarmerController::class, 'logout']);
+        // list all drone
+        Route::get('/drone', [DroneController::class, 'index']);
+        
     });
 
     // drone

@@ -13,7 +13,9 @@ class DroneController extends Controller
      */
     public function index()
     {
-        //
+        // //
+        // $drones = Drone::all();
+        // return response()->json(['success' => true, 'drone' => ])
     }
 
     /**
