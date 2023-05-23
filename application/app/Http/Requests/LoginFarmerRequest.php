@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreFarmRequest extends FormRequest
+class LoginFarmerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,12 +15,10 @@ class StoreFarmRequest extends FormRequest
     {
         return true;
     }
-
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,8 +28,7 @@ class StoreFarmRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'password' => 'required|string|min:8|',
         ];
     }

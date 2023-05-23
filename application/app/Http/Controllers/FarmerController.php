@@ -2,65 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Farmer;
-use App\Http\Requests\StoreFarmerRequest;
-use App\Http\Requests\UpdateFarmerRequest;
+use App\Http\Requests\LoginFarmerRequest;
+use App\Http\Requests\StoreFarmRequest;
+use App\Http\Resources\FarmerResource;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class FarmerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function register(StoreFarmRequest $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        $token = $user->createToken('token-name', ['post', 'get', 'update', 'delete'])->plainTextToken;
+        return response()->json(['message' => 'register successfully', 'token' => $token, 'farmer' => new FarmerResource($user)]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function login(LoginFarmerRequest $request)
     {
-        //
+        $cridentail = $request->only('email', 'password');
+        if (Auth::attempt($cridentail)) {
+            $user = Auth::user();
+            $token = $user->createToken('token-name')->plainTextToken;
+            return response()->json(['message' => 'login successfully', 'token' => $token, 'farmer' => new FarmerResource($user)]);
+        }
+        return response()->json(['message' => 'login failed'], 401);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreFarmerRequest $request)
+    public function logout(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Farmer $farmer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Farmer $farmer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFarmerRequest $request, Farmer $farmer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Farmer $farmer)
-    {
-        //
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logged out successfully']);
     }
 }
