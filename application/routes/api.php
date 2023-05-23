@@ -21,16 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     // Protected routes
-    
+
     //farmer
     Route::prefix('/farmer')->group(function () {
         // ------------------- farmer route -------------
         Route::post('/logout', [FarmerController::class, 'logout']);
     });
-
     // drone
     Route::prefix('/drone')->group(function () {
-        
+
         // ------------------- drone route -------------
     });
 });

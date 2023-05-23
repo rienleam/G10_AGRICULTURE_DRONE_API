@@ -15,5 +15,6 @@ class Drone extends Model
         'payload_capacity',
         'current_latitude',
         'current_longitude',
+        'user_id'
     ];
 }
