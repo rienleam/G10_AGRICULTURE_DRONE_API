@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DroneController;
 use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\MapController;
+use App\Http\Resources\MapsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //farmer
     Route::prefix('/farmer')->group(function () {
-        // ------------------- farmer route -------------
+        // ------------------- farmer route --------------------------
         Route::post('/logout', [FarmerController::class, 'logout']);
+        // ------------------- Dronw route --------------------------
         // list all drone frome farmer
         Route::get('/drones/from/{farmer_id}', [DroneController::class, 'getDroneFromFarmer']);
         // get specific drone
@@ -35,8 +38,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/drones', [DroneController::class, 'index']);
         // location of the specific drone
         Route::get('/drones/{drone_id}/location', [DroneController::class, 'droneLocation']);
+        // ------------------- maps route --------------------------
         //list all map 
-        Route::get('/maps', [DroneController::class, 'listAllmaps']);
+        Route::get('/maps', [MapController::class, 'index']);
+        // get maps frome province name and farm id
+        Route::get('/maps/{province_name}/{farm_id}', [MapController::class, 'getMapFromeProvince']);
     });
     // drone
     Route::prefix('/drone')->group(function () {
