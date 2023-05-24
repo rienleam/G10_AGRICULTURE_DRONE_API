@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DronesResource extends JsonResource
+class DroneLocationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +19,11 @@ class DronesResource extends JsonResource
             "name" => $this->name,
             "drone_type" => $this->drone_type,
             "battery_status" => $this->battery_status,
-            "payload_capacity" => $this->payload_capacity,
-            "current_latitude" => $this->current_latitude,
-            "current_longitude" => $this->current_longitude,
-            'owner' => new FarmerResource($this->user) ,
+            "location" => [
+                "current_latitude" => $this->current_latitude,
+                "current_longitude" => $this->current_longitude,
+            ],
+
         ];
     }
 }

@@ -14,4 +14,8 @@ class Farm extends Model
         'size',
         'province_id',
     ];
+    public function maps()
+    {
+        return $this->hasMany(Map::class);
+    }
 }

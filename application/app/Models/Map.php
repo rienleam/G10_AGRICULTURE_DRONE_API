@@ -13,4 +13,13 @@ class Map extends Model
         'farm_id',
         'drone_id',
     ];
+
+    public function drone()
+    {
+        return $this->belongsTo(Drone::class);
+    }
+    public function farm()
+    {
+        return $this->belongsTo(Farm::class);
+    }
 }

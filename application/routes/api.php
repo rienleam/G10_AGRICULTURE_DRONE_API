@@ -27,9 +27,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/farmer')->group(function () {
         // ------------------- farmer route -------------
         Route::post('/logout', [FarmerController::class, 'logout']);
+        // list all drone frome farmer
+        Route::get('/drones/from/{farmer_id}', [DroneController::class, 'getDroneFromFarmer']);
+        // get specific drone
+        Route::get('/drones/{drone_id}', [DroneController::class, 'show']);
         // list all drone
-        Route::get('/drone', [DroneController::class, 'index']);
-        
+        Route::get('/drones', [DroneController::class, 'index']);
+        // location of the specific drone
+        Route::get('/drones/{drone_id}/location', [DroneController::class, 'droneLocation']);
+        //list all map 
+        Route::get('/maps', [DroneController::class, 'listAllmaps']);
     });
     // drone
     Route::prefix('/drone')->group(function () {

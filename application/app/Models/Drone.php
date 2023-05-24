@@ -17,4 +17,14 @@ class Drone extends Model
         'current_longitude',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function maps()
+    {
+        return $this->hasMany(Map::class);
+    }
 }
