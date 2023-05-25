@@ -43,6 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/maps', [MapController::class, 'index']);
         // get maps frome province name and farm id
         Route::get('/maps/{province_name}/{farm_id}', [MapController::class, 'getMapFromeProvince']);
+        // delete maps frome province name and farm id
+        Route::delete('/maps/{province_name}/{farm_id}', [MapController::class, 'deleteMapFromeFarm']);
     });
     // drone
     Route::prefix('/drone')->group(function () {
