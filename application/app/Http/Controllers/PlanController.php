@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
+use App\Http\Resources\PlanResource;
+use PHPUnit\TextUI\XmlConfiguration\Validator;
 
 class PlanController extends Controller
 {
@@ -29,7 +31,12 @@ class PlanController extends Controller
      */
     public function store(StorePlanRequest $request)
     {
-        //
+        $plan = Plan::create([
+            'plan_type' => $request->plan_type,
+            'plan_details' => $request->plan_details,
+            'user_id' => $request->user_id,
+        ]);
+        return response()->json(['message' => 'plan create successfully', 'plan' => new PlanResource($plan)]);
     }
 
     /**

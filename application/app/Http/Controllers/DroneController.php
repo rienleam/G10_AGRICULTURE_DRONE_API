@@ -63,9 +63,19 @@ class DroneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDroneRequest $request, Drone $drone)
+    public function update(UpdateDroneRequest $request, $id)
     {
-        //
+        $drone = Drone::find($id);
+        $drone->update([
+            'name' => $request->input('name'),
+            'drone_type' => $request->input('drone_type'),
+            'battery_status' => $request->input('battery_status'),
+            'payload_capacity' => $request->input('payload_capacity'),
+            'current_latitude' => $request->input('current_latitude'),
+            'current_longitude' => $request->input('current_longitude'),
+            'user_id' => $request->input('user_id'),
+        ]);
+        return response()->json(['message' => 'plan update successfully', 'drone' => $drone]);
     }
 
     /**

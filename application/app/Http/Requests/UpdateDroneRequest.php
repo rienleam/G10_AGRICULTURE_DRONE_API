@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateDroneRequest extends FormRequest
 {
@@ -11,7 +13,11 @@ class UpdateDroneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
     }
 
     /**
@@ -22,7 +28,13 @@ class UpdateDroneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'drone_type' => 'required',
+            'battery_status' => 'required',
+            'payload_capacity' => 'required',
+            'current_latitude' => 'required',
+            'current_longitude' => 'required',
+            'user_id' => 'required',
         ];
     }
 }

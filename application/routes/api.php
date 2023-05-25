@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DroneController;
 use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\InstructionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,14 +37,23 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/drones', [DroneController::class, 'index']);
         // location of the specific drone
         Route::get('/drones/{drone_id}/location', [DroneController::class, 'droneLocation']);
-        //list all map 
+        // list all map 
         Route::get('/maps', [DroneController::class, 'listAllmaps']);
+        // list all map 
+        Route::post('/plans/plan', [PlanController::class, 'store']);
     });
     // drone
-    Route::prefix('/drone')->group(function () {
-
+    Route::prefix('/drones')->group(function () {
         // ------------------- drone route -------------
+        // update drone with id 
+        Route::put('/{id}', [DroneController::class, 'update']);
+        // update drone with id 
+        Route::put('/instruct/{droneID}', [InstructionController::class, 'update']);
     });
+
+    // create new instruction 
+    Route::post('/instructions', [InstructionController::class, 'store']);
+
 });
 
 Route::prefix('/farmer')->group(function () {
