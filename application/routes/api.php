@@ -55,12 +55,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', [DroneController::class, 'update']);
         // run drone with id 
         Route::put('/instruct/{droneID}', [InstructionController::class, 'update']);
+
     });
 
     // ------------------- drone instructions -------------
     Route::prefix('/instructions')->group(function () {
         // create new instruction 
-        Route::post('/', [InstructionController::class, 'store']);
+        Route::post('/', [InstructionController::class, 'store']);        
+        // list all instructions 
+        Route::get('/', [InstructionController::class, 'index']);
     });
 
     // ------------------- drone instructions -------------
