@@ -5,7 +5,6 @@ use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\InstructionController;
 use App\Http\Controllers\MapController;
-use App\Http\Resources\MapsResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,48 +24,53 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Protected routes
-
-    //farmer
+    // =============== Protected routes ==================
+    // ------------------- farmer route --------------------------
     Route::prefix('/farmer')->group(function () {
-        // ------------------- farmer route --------------------------
+        // farmer logout
         Route::post('/logout', [FarmerController::class, 'logout']);
-
-        // ------------------- Drone route --------------------------
-        // list all drone frome farmer
-        Route::get('/drones/from/{farmer_id}', [DroneController::class, 'getDroneFromFarmer']);
-        // get specific drone
-        Route::get('/drones/{drone_id}', [DroneController::class, 'show']);
-        // list all drone
-        Route::get('/drones', [DroneController::class, 'index']);
-        // location of the specific drone
-        Route::get('/drones/{drone_id}/location', [DroneController::class, 'droneLocation']);
-        // update drone with id 
-        Route::put('/drones/{id}', [DroneController::class, 'update']);
-        // run drone with id 
-        Route::put('/drones/instruct/{droneID}', [InstructionController::class, 'update']);
-
-        // ------------------- maps route --------------------------
-        //list all map 
-        Route::get('/maps', [MapController::class, 'index']);
-        // get maps frome province name and farm id
-        Route::get('/maps/{province_name}/{farm_id}', [MapController::class, 'getMapFromeProvince']);
-        // delete maps frome province name and farm id
-        Route::delete('/maps/{province_name}/{farm_id}', [MapController::class, 'deleteMapFromeFarm']);
-
-         // ------------------- instruct route --------------------------
-        // create new plan 
-        Route::post('/plans/plan', [PlanController::class, 'store']);
-        
     });
-    // drone
+
+    // ------------------- maps route --------------------------
+    Route::prefix('/maps')->group(function () {
+        //list all map 
+        Route::get('/', [MapController::class, 'index']);
+        // get maps frome province name and farm id
+        Route::get('/{province_name}/{farm_id}', [MapController::class, 'getMapFromeProvince']);
+        // delete maps frome province name and farm id
+        Route::delete('/{province_name}/{farm_id}', [MapController::class, 'deleteMapFromeFarm']);
+    });
+
+    // ------------------- Drone route --------------------------
     Route::prefix('/drones')->group(function () {
-        // ------------------- drone route -------------
+        // list all drone frome farmer
+        Route::get('/from/{farmer_id}', [DroneController::class, 'getDroneFromFarmer']);
+        // get specific drone
+        Route::get('/{drone_id}', [DroneController::class, 'show']);
+        // list all drone
+        Route::get('/', [DroneController::class, 'index']);
+        // location of the specific drone
+        Route::get('/{drone_id}/location', [DroneController::class, 'droneLocation']);
+        // update drone with id 
+        Route::put('/{id}', [DroneController::class, 'update']);
+        // run drone with id 
+        Route::put('/instruct/{droneID}', [InstructionController::class, 'update']);
+    });
+
+    // ------------------- drone instructions -------------
+    Route::prefix('/instructions')->group(function () {
         // create new instruction 
-        Route::post('/instructions', [InstructionController::class, 'store']);
+        Route::post('/', [InstructionController::class, 'store']);
+    });
+
+    // ------------------- drone instructions -------------
+    Route::prefix('/plans')->group(function () {
+        // create new plan 
+        Route::post('/plan', [PlanController::class, 'store']);
     });
 });
 
+// ------------------- farmer route without protect --------------------------
 Route::prefix('/farmer')->group(function () {
     Route::post('/register', [FarmerController::class, 'register']);
     Route::post('/login', [FarmerController::class, 'login']);
