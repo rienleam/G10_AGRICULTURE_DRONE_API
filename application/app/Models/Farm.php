@@ -18,4 +18,9 @@ class Farm extends Model
     {
         return $this->hasMany(Map::class);
     }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }

@@ -103,9 +103,4 @@ class DroneController extends Controller
         }
         return response()->json(['success' => true, 'drone' => new DroneLocationResource($drone)], 200);
     }
-
-    public function listAllmaps(){
-        $maps = Map::all();
-        return response()->json(['success' => true, 'maps' => MapsResource::collection($maps)], 200);
-    }
 }
