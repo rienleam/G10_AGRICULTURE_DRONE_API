@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{province_name}/{farm_id}', [MapController::class, 'getMapFromeProvince']);
         // delete maps frome province name and farm id
         Route::delete('/{province_name}/{farm_id}', [MapController::class, 'deleteMapFromeFarm']);
+        // add a new map into the farm
+        Route::post('/', [MapController::class, 'store']);
     });
 
     // ------------------- Drone route --------------------------

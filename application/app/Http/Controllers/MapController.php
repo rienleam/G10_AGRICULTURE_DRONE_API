@@ -31,7 +31,9 @@ class MapController extends Controller
      */
     public function store(StoreMapRequest $request)
     {
-        //
+        $map = Map::create($request->all());
+        return response()->json(['success' => true,'message' => 'Create map successfully', 'map' => new MapsResource($map)], 201);
+
     }
 
     /**
