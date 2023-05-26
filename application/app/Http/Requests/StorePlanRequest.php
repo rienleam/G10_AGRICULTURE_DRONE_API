@@ -30,6 +30,7 @@ class StorePlanRequest extends FormRequest
         return [
             'plan_type' => 'required',
             'plan_details' => 'required',
+            'area' => 'required',
             'user_id' => 'required',
         ];
     }

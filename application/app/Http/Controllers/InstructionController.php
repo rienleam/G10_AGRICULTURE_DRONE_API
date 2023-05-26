@@ -6,6 +6,7 @@ use App\Models\Instruction;
 use App\Http\Requests\StoreInstructionRequest;
 use App\Http\Requests\UpdateInstructionRequest;
 use App\Http\Resources\InstructionResource;
+use App\Models\Drone;
 use Illuminate\Http\Request;
 
 class InstructionController extends Controller
@@ -13,10 +14,10 @@ class InstructionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($drone_id)
     {
-        $instructions = Instruction::all();
-        return response()->json(['success' => true, 'message' => 'List all instructions successfully', 'instructions' => InstructionResource::collection($instructions)], 200);
+        $drone = Drone::find($drone_id);
+        return response()->json(['success' => true, 'message' => 'List all instructions succes/sfully', 'instructions' => InstructionResource::collection($drone->instructions)], 200);
     }
 
     /**
@@ -36,6 +37,7 @@ class InstructionController extends Controller
             'speed' => $request->speed,
             'altitude' => $request->altitude,
             'action' => $request->action,
+            'datetime' => $request->datetime,
             'drone_id' => $request->drone_id,
             'plan_id' => $request->plan_id,
         ]);
@@ -61,9 +63,9 @@ class InstructionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $droneID)
+    public function update(Request $request, $drone_id)
     {   $actionRequest =$request->only('action');
-        $instruction = Instruction::find($droneID);
+        $instruction = Instruction::find($drone_id);
         $instruction->update([
             'action' =>  $actionRequest,
         ]);

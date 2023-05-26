@@ -12,7 +12,13 @@ class Instruction extends Model
         'speed',
         'altitude',
         'action',
+        'datetime',
         'drone_id',
         'plan_id',
     ];
+    
+    public function drones()
+    {
+        return $this->belongsTo(Drone::class);
+    }
 }

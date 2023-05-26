@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('speed');
             $table->string('altitude');
             $table->string('action');
+            $table->dateTime('datetime');
             $table->unsignedBigInteger('drone_id');
             $table->foreign('drone_id')
                     ->references('id')

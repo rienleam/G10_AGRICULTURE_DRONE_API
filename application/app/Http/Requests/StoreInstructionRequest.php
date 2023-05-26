@@ -31,6 +31,7 @@ class StoreInstructionRequest extends FormRequest
             'speed' => 'required',
             'altitude' => 'required',
             'action' => 'required',
+            'datetime' => 'required',
             'drone_id' => 'required',
             'plan_id' => 'required',
         ];

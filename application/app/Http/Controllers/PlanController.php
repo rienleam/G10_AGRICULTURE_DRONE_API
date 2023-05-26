@@ -34,6 +34,7 @@ class PlanController extends Controller
         $plan = Plan::create([
             'plan_type' => $request->plan_type,
             'plan_details' => $request->plan_details,
+            'area' => $request->area,
             'user_id' => $request->user_id,
         ]);
         return response()->json(['message' => 'plan create successfully', 'plan' => new PlanResource($plan)]);

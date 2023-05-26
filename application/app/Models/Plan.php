@@ -11,6 +11,7 @@ class Plan extends Model
     protected $fillable = [
         'plan_type',
         'plan_details',
+        'area',
         'user_id',
     ];
 }

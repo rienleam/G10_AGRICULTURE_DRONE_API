@@ -18,6 +18,7 @@ class InstructionResource extends JsonResource
             'speed' => $this->speed,
             'altitude' => $this->altitude,
             'action' => $this->action,
+            'datetime' => $this->datetime,
             'drone_id' => $this->drone_id,
             'plan_id' => $this->plan_id,
         ];

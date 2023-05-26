@@ -54,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // update drone with id 
         Route::put('/{id}', [DroneController::class, 'update']);
         // run drone with id 
-        Route::put('/instruct/{droneID}', [InstructionController::class, 'update']);
+        Route::put('/instruct/{drone_id}', [InstructionController::class, 'update']);
 
     });
 
@@ -63,7 +63,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // create new instruction 
         Route::post('/', [InstructionController::class, 'store']);        
         // list all instructions 
-        Route::get('/', [InstructionController::class, 'index']);
+        Route::get('/{drone_id}', [InstructionController::class, 'index']);
     });
 
     // ------------------- drone instructions -------------

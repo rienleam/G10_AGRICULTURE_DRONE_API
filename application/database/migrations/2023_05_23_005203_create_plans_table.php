@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('plan_type');
             $table->string('plan_details');
+            $table->string('area');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

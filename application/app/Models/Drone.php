@@ -27,4 +27,8 @@ class Drone extends Model
     {
         return $this->hasMany(Map::class);
     }
+    public function instructions()
+    {
+        return $this->hasMany(Instruction::class);
+    }
 }
