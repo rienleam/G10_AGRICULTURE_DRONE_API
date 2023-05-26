@@ -36,15 +36,20 @@ class PlanController extends Controller
             'plan_details' => $request->plan_details,
             'user_id' => $request->user_id,
         ]);
-        return response()->json(['message' => 'plan create successfully', 'plan' => new PlanResource($plan)]);
+        return response()->json(['success' => true , 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)],200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Plan $plan)
+    public function show(string $id)
     {
-        //
+        $plan = Plan::find($id);
+        if (empty($plan)){
+            return response()->json(['success' => false, 'message' => 'Undefined plan id:'. $id. ''],401);
+        }
+        return response()->json(['success' => true , 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)],200);
+
     }
 
     /**
