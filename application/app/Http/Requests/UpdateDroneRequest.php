@@ -28,13 +28,13 @@ class UpdateDroneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'drone_type' => 'required',
+            'name' => 'required|string',
+            'drone_type' => 'required|string',
             'battery_status' => 'required',
-            'payload_capacity' => 'required',
-            'current_latitude' => 'required',
-            'current_longitude' => 'required',
-            'user_id' => 'required',
+            'payload_capacity' => 'required|string',
+            'current_latitude' => 'required|string',
+            'current_longitude' => 'required|string',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }

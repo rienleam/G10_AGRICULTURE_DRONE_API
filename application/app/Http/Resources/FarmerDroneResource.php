@@ -19,7 +19,7 @@ class FarmerDroneResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'drons' => DronesResource::collection($this->drones)
+            'drones' => DroneInforResource::collection($this->drones)
         ];
     }
 }

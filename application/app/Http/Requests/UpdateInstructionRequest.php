@@ -28,11 +28,12 @@ class UpdateInstructionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'speed' => 'required',
-            'altitude' => 'required',
-            'action' => 'required',
-            'drone_id' => 'required',
-            'plan_id' => 'required',
+            'speed' => 'required|string',
+            'altitude' => 'required|string',
+            'action' => 'required|string',
+            'datetime' => 'required|date|date_format:Y-m-d H:i:s',
+            'drone_id' => 'required|exists:drones,id',
+            'plan_id' => 'required|exists:plans,id',
         ];
     }
 }

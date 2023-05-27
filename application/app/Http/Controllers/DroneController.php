@@ -8,8 +8,6 @@ use App\Http\Requests\UpdateDroneRequest;
 use App\Http\Resources\DroneLocationResource;
 use App\Http\Resources\DronesResource;
 use App\Http\Resources\FarmerDroneResource;
-use App\Http\Resources\MapsResource;
-use App\Models\Map;
 use App\Models\User;
 
 class DroneController extends Controller
@@ -20,7 +18,7 @@ class DroneController extends Controller
     public function index()
     {
         $drones = Drone::all();
-        return response()->json(['success' => true, 'message' => 'List all drone successfully', 'drones' => DronesResource::collection($drones)], 200);
+        return response()->json(['success' => true, 'message' => 'List all drones successfully', 'drones' => DronesResource::collection($drones)], 200);
     }
 
     /**
@@ -47,9 +45,9 @@ class DroneController extends Controller
 
         $drone = Drone::find($drone_id);
         if (!isset($drone)) {
-            return response()->json(['success' => false, 'drones' => "Drone id: " . $drone_id . " doesn't exsit"], 401);
+            return response()->json(['success' => false, 'message' => "Drone id: " . $drone_id . " doesn't exsit"], 401);
         }
-        return response()->json(['success' => true, 'drones' => new DronesResource($drone)], 200);
+        return response()->json(['success' => true, 'message' => 'drone request successfully', 'drones' => new DronesResource($drone)], 200);
     }
 
     /**
@@ -66,6 +64,9 @@ class DroneController extends Controller
     public function update(UpdateDroneRequest $request, $id)
     {
         $drone = Drone::find($id);
+        if (empty($drone)){
+            return response()->json(['success' => false, 'message' => "drone id: " . $id . " doesn't exsit"], 401);
+        }
         $drone->update([
             'name' => $request->input('name'),
             'drone_type' => $request->input('drone_type'),
@@ -75,7 +76,7 @@ class DroneController extends Controller
             'current_longitude' => $request->input('current_longitude'),
             'user_id' => $request->input('user_id'),
         ]);
-        return response()->json(['message' => 'plan update successfully', 'drone' => $drone]);
+        return response()->json(['success' => true, 'message' => 'plan update successfully', 'drone' => new DronesResource($drone)], 200);
     }
 
     /**
@@ -90,7 +91,7 @@ class DroneController extends Controller
     {
         $farmer = User::find($farmer_id);
         if (!isset($farmer)) {
-            return response()->json(['success' => false, 'drones' => "Farmer id: " . $farmer_id . " doesn't exsit"], 401);
+            return response()->json(['success' => false, 'message' => "Farmer id: " . $farmer_id . " doesn't exsit"], 401);
         }
         return response()->json(['success' => true, 'message' => 'List all drone from farmer id: ' . $farmer_id . ' successfully', 'Farmer' => new FarmerDroneResource($farmer)], 200);
     }
@@ -99,8 +100,8 @@ class DroneController extends Controller
     {
         $drone = Drone::find($drone_id);
         if (!isset($drone)) {
-            return response()->json(['success' => false, 'drones' => "Drone id: " . $drone_id . " doesn't exsit"], 401);
+            return response()->json(['success' => false, 'message' => "drone id: " . $drone_id . " doesn't exsit"], 401);
         }
-        return response()->json(['success' => true, 'drone' => new DroneLocationResource($drone)], 200);
+        return response()->json(['success' => true, 'message' => 'get drone location successfully', 'drone' => new DroneLocationResource($drone)], 200);
     }
 }

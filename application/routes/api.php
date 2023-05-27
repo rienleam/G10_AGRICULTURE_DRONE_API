@@ -56,18 +56,18 @@ Route::middleware('auth:sanctum')->group(function () {
         // update drone with id 
         Route::put('/{id}', [DroneController::class, 'update']);
         // run drone with id 
-        Route::put('/instruct/{droneID}', [InstructionController::class, 'update']);
+        Route::put('/instruct/{drone_id}', [InstructionController::class, 'update']);
     });
 
-    // ------------------- drone instructions -------------
+    // ------------------- Instructions Route -------------
     Route::prefix('/instructions')->group(function () {
         // create new instruction 
         Route::post('/', [InstructionController::class, 'store']);
         // list all instructions 
-        Route::get('/', [InstructionController::class, 'index']);
+        Route::get('/{drone_id}', [InstructionController::class, 'index']);
     });
 
-    // ------------------- drone instructions -------------
+    // ------------------- plans route -------------
     Route::prefix('/plans')->group(function () {
         // create new plan 
         Route::post('/', [PlanController::class, 'store']);
@@ -80,4 +80,24 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('/farmer')->group(function () {
     Route::post('/register', [FarmerController::class, 'register']);
     Route::post('/login', [FarmerController::class, 'login']);
+});
+// ------------------- drone instructions -------------
+Route::prefix('/instructions')->group(function () {
+    // list all instructions 
+    Route::get('/{drone_id}', [InstructionController::class, 'index']);
+});
+// ------------------- plans route -------------
+Route::prefix('/plans')->group(function () {
+    //get a spacific plan 
+    Route::get('/{id}', [PlanController::class, 'show']);
+});
+// ------------------- maps route --------------------------
+Route::prefix('/maps')->group(function () {
+    // add a new map into the farm
+    Route::post('/', [MapController::class, 'store']);
+});
+// ------------------- Drone route --------------------------
+Route::prefix('/drones')->group(function () {
+    // update drone with id 
+    Route::put('/{id}', [DroneController::class, 'update']);
 });

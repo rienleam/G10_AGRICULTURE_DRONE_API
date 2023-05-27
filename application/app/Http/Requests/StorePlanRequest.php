@@ -28,9 +28,11 @@ class StorePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'plan_type' => 'required',
-            'plan_details' => 'required',
-            'user_id' => 'required',
+            'plan_type' => 'required|string',
+            'plan_details' => 'required|string',
+            'area' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'farm_id' => 'required|exists:farms,id',
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Instruction;
 use App\Http\Requests\StoreInstructionRequest;
-use App\Http\Requests\UpdateInstructionRequest;
 use App\Http\Resources\InstructionResource;
+use App\Models\Drone;
 use Illuminate\Http\Request;
 
 class InstructionController extends Controller
@@ -13,10 +13,13 @@ class InstructionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($drone_id)
     {
-        $instructions = Instruction::all();
-        return response()->json(['success' => true, 'message' => 'List all instructions successfully', 'instructions' => InstructionResource::collection($instructions)], 200);
+        $drone = Drone::find($drone_id);
+        if (empty($drone)) {
+            return response()->json(['success' => false, 'message' => "Drone id: " . $drone_id . " doesn't exsit"], 401);
+        }
+        return response()->json(['success' => true, 'message' => 'list all instructions successfully', 'instructions' => InstructionResource::collection($drone->instructions)], 200);
     }
 
     /**
@@ -36,6 +39,7 @@ class InstructionController extends Controller
             'speed' => $request->speed,
             'altitude' => $request->altitude,
             'action' => $request->action,
+            'datetime' => $request->datetime,
             'drone_id' => $request->drone_id,
             'plan_id' => $request->plan_id,
         ]);
@@ -61,13 +65,17 @@ class InstructionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $droneID)
-    {   $actionRequest =$request->only('action');
-        $instruction = Instruction::find($droneID);
+    public function update(Request $request, $instruction_id)
+    {
+        $actionRequest = $request->only('action');
+        $instruction = Instruction::find($instruction_id);
+        if (empty($instruction)) {
+            return response()->json(['success' => false, 'message' => "instrution id: " . $instruction_id . " doesn't exsit"], 401);
+        }
         $instruction->update([
-            'action' =>  $actionRequest,
+            'action' =>  $actionRequest['action'],
         ]);
-        return response()->json(['message' => 'instruction update successfully', 'instruction' => $instruction]);
+        return response()->json(['success' => true, 'message' => 'instruction update successfully', 'instruction' => new InstructionResource($instruction)], 200);
     }
 
     /**

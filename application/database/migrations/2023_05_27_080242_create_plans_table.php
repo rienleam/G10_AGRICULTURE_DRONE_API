@@ -15,10 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('plan_type');
             $table->string('plan_details');
+            $table->string('area');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('farm_id');
+            $table->foreign('farm_id')
+                ->references('id')
+                ->on('plans')
                 ->onDelete('cascade');
             $table->timestamps();
         });

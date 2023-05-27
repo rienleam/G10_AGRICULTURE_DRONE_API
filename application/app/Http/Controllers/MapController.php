@@ -16,7 +16,7 @@ class MapController extends Controller
     public function index()
     {
         $maps = Map::all();
-        return response()->json(['success' => true, 'maps' => MapsResource::collection($maps)], 200);
+        return response()->json(['success' => true,'message' => 'Request maps successfully', 'maps' => MapsResource::collection($maps)], 200);
     }
     /**
      * Show the form for creating a new resource.

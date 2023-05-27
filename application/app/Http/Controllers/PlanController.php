@@ -6,7 +6,6 @@ use App\Models\Plan;
 use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
 use App\Http\Resources\PlanResource;
-use PHPUnit\TextUI\XmlConfiguration\Validator;
 
 class PlanController extends Controller
 {
@@ -31,12 +30,8 @@ class PlanController extends Controller
      */
     public function store(StorePlanRequest $request)
     {
-        $plan = Plan::create([
-            'plan_type' => $request->plan_type,
-            'plan_details' => $request->plan_details,
-            'user_id' => $request->user_id,
-        ]);
-        return response()->json(['success' => true , 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)],200);
+        $plan = Plan::create($request->all());
+        return response()->json(['success' => true, 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)], 200);
     }
 
     /**
@@ -45,11 +40,10 @@ class PlanController extends Controller
     public function show(string $id)
     {
         $plan = Plan::find($id);
-        if (empty($plan)){
-            return response()->json(['success' => false, 'message' => 'Undefined plan id:'. $id. ''],401);
+        if (empty($plan)) {
+            return response()->json(['success' => false, 'message' => 'Undefined plan id:' . $id . ''], 401);
         }
-        return response()->json(['success' => true , 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)],200);
-
+        return response()->json(['success' => true, 'message' => 'plan create successfully', 'plan' => new PlanResource($plan)], 200);
     }
 
     /**
