@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "17b1774e-4314-47fa-a936-8501b95d53ac",
+		"name": "Agriculture Drone API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27294239",
+		"_collection_link": "https://restless-water-888362.postman.co/workspace/Laravel-project~f30d5db6-c555-47f6-93da-f3c322877f2b/collection/27294239-17b1774e-4314-47fa-a936-8501b95d53ac?action=share&creator=27294239&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Farmer Request",
+			"item": [
+				{
+					"name": "Drone",
+					"item": [
+						{
+							"name": "Get all drone from farmer id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|wqFVsoqrkLF2SPPlWfUNo3gxLApiwszByOebefbW",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones/from/2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones",
+										"from",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all drones",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|wqFVsoqrkLF2SPPlWfUNo3gxLApiwszByOebefbW",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get specific drone",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|wqFVsoqrkLF2SPPlWfUNo3gxLApiwszByOebefbW",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get location of drone",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|wqFVsoqrkLF2SPPlWfUNo3gxLApiwszByOebefbW",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones/5/location",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones",
+										"5",
+										"location"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Plan",
+					"item": [
+						{
+							"name": "create_plan",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|hrqFzGtfJPuMobtmwivdEk4azEKjDYtZpA3mN27w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "plan_type",
+											"value": "Harvesting Plan",
+											"type": "text"
+										},
+										{
+											"key": "plan_details",
+											"value": "The drone will be used for harvesting crops, such as fruit or vegetables",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "6",
+											"type": "text"
+										},
+										{
+											"key": "area",
+											"value": "POLYGON((6.535406112670899 46.655990545464206,6.5360498428344735 46.655710711675226,6.535298824310304 46.654561905156164,6.534655094146729 46.654723917810095,6.535406112670899 46.655990545464206))",
+											"type": "text"
+										},
+										{
+											"key": "farm_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/plans/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"plans",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Instruction",
+					"item": [
+						{
+							"name": "instruc_drone_with_id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|hrqFzGtfJPuMobtmwivdEk4azEKjDYtZpA3mN27w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "action",
+											"value": "operation",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones/instruct/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones",
+										"instruct",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create_instruction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|hrqFzGtfJPuMobtmwivdEk4azEKjDYtZpA3mN27w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "speed",
+											"value": "75 kh/h",
+											"type": "text"
+										},
+										{
+											"key": "altitude",
+											"value": "3200 meters",
+											"type": "text"
+										},
+										{
+											"key": "action",
+											"value": "stop",
+											"type": "text"
+										},
+										{
+											"key": "drone_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "plan_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "datetime",
+											"value": "2023-05-09 14:30:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructions",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Map",
+					"item": [
+						{
+							"name": "list all maps",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|J3HScnUPJPU6xAf18Uxh6UvfcgN9RahV5KnjAhj1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/maps",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"maps"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get map from province and farm id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|Hmaho57iSUcRDKOzgMda1hyIgcECYKkLsIQSpXnh",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/maps/Siem Reap/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"maps",
+										"Siem Reap",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete map by province and farm",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "4|J3HScnUPJPU6xAf18Uxh6UvfcgN9RahV5KnjAhj1",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/maps/Banteaymeanchey/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"maps",
+										"Banteaymeanchey",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Farmer",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "vorak Yun",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "virak.kep322@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/farmer/register",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"farmer",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "virak.kep222@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/farmer/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"farmer",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|YpJhqJlINUnU1r69M7eitQD1r8pOhPylzv7FxWNK",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/farmer/logout",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"farmer",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Drone Request",
+			"item": [
+				{
+					"name": "Instruction",
+					"item": [
+						{
+							"name": "get instructions with id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|Lj2ehNVXwDXTZ0a92zs3drkMjZSH4VDzbaVA70lj",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/instructions/3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"instructions",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Plan",
+					"item": [
+						{
+							"name": "Get specific plan",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/plans/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"plans",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Map",
+					"item": [
+						{
+							"name": "Create Map by drone",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "2|Lj2ehNVXwDXTZ0a92zs3drkMjZSH4VDzbaVA70lj",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "image",
+											"value": "https://img.freepik.com/premium-photo/bunch-grapes_694215-251.jpg?w=360",
+											"type": "text"
+										},
+										{
+											"key": "drone_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "farm_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "area",
+											"value": "ggggg",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/maps",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"maps"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Drone",
+					"item": [
+						{
+							"name": "update_drone_with_id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|Hmaho57iSUcRDKOzgMda1hyIgcECYKkLsIQSpXnh",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "DJI Phantom 4 Pro",
+											"type": "text"
+										},
+										{
+											"key": "drone_type",
+											"value": "camera",
+											"type": "text"
+										},
+										{
+											"key": "battery_status",
+											"value": "90",
+											"type": "text"
+										},
+										{
+											"key": "payload_capacity",
+											"value": "10 kilograms",
+											"type": "text"
+										},
+										{
+											"key": "current_latitude",
+											"value": "40.7128° N",
+											"type": "text"
+										},
+										{
+											"key": "current_longitude",
+											"value": "74.0060° W",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/drones/4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"drones",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
